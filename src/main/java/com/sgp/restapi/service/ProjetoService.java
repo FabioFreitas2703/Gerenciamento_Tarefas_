@@ -41,7 +41,7 @@ public class ProjetoService {
                 })
                 .orElse(null);
     }
-// receba esta bencao varao
+
     public boolean excluir(Long id) {
         return projetoRepository.findById(id)
                 .map(projeto -> {

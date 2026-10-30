@@ -21,8 +21,9 @@ public class ProjetoController {
 
     // Cadastrar projeto
     @PostMapping
-    public Projeto criar(@RequestBody Projeto projeto) {
-        return projetoService.salvar(projeto);
+    public ResponseEntity<Projeto> criar(@RequestBody Projeto projeto) {
+        Projeto savedProjeto = projetoService.salvar(projeto);
+        return ResponseEntity.status(201).body(savedProjeto);
     }
 
     // Listar todos os projetos

@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import com.sgp.restapi.enums.EnumStatusProjeto;
+import jakarta.persistence.Column;
 
 @Entity 
 @Table(name = "projeto")
@@ -22,14 +23,19 @@ import com.sgp.restapi.enums.EnumStatusProjeto;
 public class Projeto {
     @Id 
     @GeneratedValue (strategy = GenerationType.IDENTITY)
+    
     private Long id;
-
+    
+    @Column(nullable = false, length = 100)
     private String nome;
 
+    @Column (name = "data_inicio", nullable = false)
     private LocalDate inicio;
 
+    @Column (name = "data_conclusao")
     private LocalDate conclusao;
 
     @Enumerated(EnumType.STRING)
-    private EnumStatusProjeto status;
+    @Column (nullable = false,length = 20)
+    private EnumStatusProjeto status = EnumStatusProjeto.ATIVO;
 }
