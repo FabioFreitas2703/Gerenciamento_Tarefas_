@@ -11,10 +11,15 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
+import jakarta.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor; 
+import lombok.ToString;
+
+import java.util.List;
+
 
 @Entity
 @Table(name = "usuario")
@@ -44,5 +49,9 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     @Column (nullable = false,length = 20)
     private EnumStatusUsuario status = EnumStatusUsuario.ATIVO;
+
+    @OneToMany(mappedBy = "usuarioResponsavel")
+    @ToString.Exclude
+    private List<Tarefa> tarefasResponsavel;
     
 }

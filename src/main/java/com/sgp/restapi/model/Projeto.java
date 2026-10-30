@@ -9,10 +9,13 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import com.sgp.restapi.enums.EnumStatusProjeto;
 import jakarta.persistence.Column;
+import java.util.List;
+import jakarta.persistence.OneToMany;
 
 @Entity 
 @Table(name = "projeto")
@@ -38,4 +41,9 @@ public class Projeto {
     @Enumerated(EnumType.STRING)
     @Column (nullable = false,length = 20)
     private EnumStatusProjeto status = EnumStatusProjeto.ATIVO;
+
+    @OneToMany(mappedBy = "projeto")
+    @ToString.Exclude 
+    private List<Tarefa> tarefas;
+
 }
