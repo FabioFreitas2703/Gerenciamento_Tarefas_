@@ -19,9 +19,10 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Column;
 
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.FetchType;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 @Data 
@@ -41,12 +42,15 @@ public class Tarefa {
     @Column(columnDefinition = "TEXT")
     private String descricao;
 
+    @JsonFormat (pattern = "dd/MM/yyyy HH:mm:ss")
     @Column (name = "data_criacao", nullable = false)
-    private LocalDateTime dataCriacao = LocalDateTime.now();
+    private LocalDateTime dataCriacao;
 
+    @JsonFormat (pattern = "dd/MM/yyyy")
     @Column (name = "data_prazo")
     private LocalDate dataPrazo;
 
+    @JsonFormat (pattern = "dd/MM/yyyy")
     @Column (name = "data_conclusao")   
     private LocalDate dataConclusao;
 
@@ -67,6 +71,13 @@ public class Tarefa {
     @JoinColumn(name = "usuario_responsavel_id")
     @ToString.Exclude
     private Usuario usuarioResponsavel;
+
+    @PrePersist 
+    public void prePersist() {
+        if (dataCriacao == null) {
+            dataCriacao = LocalDateTime.now();
+        }
+    }
 
 
 }

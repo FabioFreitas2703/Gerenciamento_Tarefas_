@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 public class UsuarioRequestDTO {
@@ -23,6 +24,7 @@ public class UsuarioRequestDTO {
     private String senha;
 
     @PastOrPresent(message = "A data de nascimento não pode ser futura")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
 
     public UsuarioRequestDTO() {

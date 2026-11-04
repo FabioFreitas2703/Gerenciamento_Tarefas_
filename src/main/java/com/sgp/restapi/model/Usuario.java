@@ -12,11 +12,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor; 
 import lombok.ToString;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.List;
 
@@ -42,6 +45,7 @@ public class Usuario {
     @Column(nullable = false)
     private String senha;
 
+    @JsonFormat (pattern = "dd/MM/yyyy")
     @Column (name = "data_nascimento")
     private LocalDate dataNascimento;
 
@@ -51,6 +55,7 @@ public class Usuario {
     private EnumStatusUsuario status = EnumStatusUsuario.ATIVO;
 
     @OneToMany(mappedBy = "usuarioResponsavel")
+    @JsonIgnore
     @ToString.Exclude
     private List<Tarefa> tarefasResponsavel;
     

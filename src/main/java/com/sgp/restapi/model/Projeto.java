@@ -16,6 +16,8 @@ import com.sgp.restapi.enums.EnumStatusProjeto;
 import jakarta.persistence.Column;
 import java.util.List;
 import jakarta.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity 
 @Table(name = "projeto")
@@ -32,9 +34,11 @@ public class Projeto {
     @Column(nullable = false, length = 100)
     private String nome;
 
+    @JsonFormat (pattern = "dd/MM/yyyy")
     @Column (name = "data_inicio", nullable = false)
     private LocalDate inicio;
 
+    @JsonFormat (pattern = "dd/MM/yyyy")
     @Column (name = "data_conclusao")
     private LocalDate conclusao;
 
@@ -43,6 +47,7 @@ public class Projeto {
     private EnumStatusProjeto status = EnumStatusProjeto.ATIVO;
 
     @OneToMany(mappedBy = "projeto")
+    @JsonIgnore
     @ToString.Exclude 
     private List<Tarefa> tarefas;
 

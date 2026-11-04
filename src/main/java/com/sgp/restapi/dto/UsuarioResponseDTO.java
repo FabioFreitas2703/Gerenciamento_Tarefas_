@@ -3,10 +3,14 @@ package com.sgp.restapi.dto;
 import java.time.LocalDate;
 import com.sgp.restapi.enums.EnumStatusUsuario; 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+
 public class UsuarioResponseDTO {
     private Long id;
     private String nome;
     private String email;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
     private EnumStatusUsuario status;
 
